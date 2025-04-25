@@ -21,7 +21,8 @@ struct Login: View {
                     .foregroundColor(.gray)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, 40)
+            .padding(.top, 100)
+            .padding(.bottom)
 
             // MARK: - Text Fields
             VStack(spacing: 16) {
@@ -56,10 +57,11 @@ struct Login: View {
             }) {
                 Text("Log in")
                     .foregroundColor(.white)
-                    .padding(.vertical, 12)
+                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .padding(.vertical, 11)
                     .frame(maxWidth: .infinity)
                     .background(Color.orange)
-                    .cornerRadius(16)
+                    .cornerRadius(12)
             }
             .frame(maxWidth: 370)
 
@@ -72,7 +74,7 @@ struct Login: View {
                     .font(.footnote)
             }
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 35)
         .padding(.bottom, 32)
     }
 }
