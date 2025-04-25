@@ -10,63 +10,70 @@ import SwiftUI
 struct Login: View {
     @State private var username: String = ""
     @State private var password: String = ""
-    
+
     var body: some View {
-        VStack (alignment: .leading){
-            Text("Welcome back!")
-                .font(.title)
-                .fontWeight(.bold)
-            
-            
-            TextField(
-                "Email or phone",
-                text: $username
-            )
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
-            .border(.secondary)
-            .frame(maxWidth: 370)
-            .frame(maxWidth: .infinity, alignment: .center)
-            
-            TextField(
-                "Password",
-                text: $password
-            )
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
-            .border(.secondary)
-            .frame(maxWidth: 370)
-            .frame(maxWidth: .infinity, alignment: .center)
-            
-            Button{} label: {
-                Text("Forgot password?")
+        VStack(spacing: 24) {
+            // MARK: - Header
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Welcome back!")
+                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                Text("Login to continue")
+                    .foregroundColor(.gray)
             }
-            .padding(.bottom)
-            
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 40)
+
+            // MARK: - Text Fields
+            VStack(spacing: 16) {
+                TextField("Email or phone", text: $username)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+
+                SecureField("Password", text: $password)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+            }
+            .frame(maxWidth: 370)
+
+            // MARK: - Forgot Password
             HStack {
                 Spacer()
-                
-                Button {}
-                label: {
-                    Text("Log in")
-                        .foregroundColor(.white)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 50)
+                Button("Forgot password?") {
+                    // action
                 }
-                .background(
-                    Capsule()
-                        .foregroundColor(.gray)
-                )
-                
-                Spacer()
+                .font(.system(size: 14))
             }
-            
-            
-            Button{}
-            label: {
+
+            // MARK: - Login Button
+            Button(action: {
+                // Log in action
+            }) {
+                Text("Log in")
+                    .foregroundColor(.white)
+                    .padding(.vertical, 12)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.orange)
+                    .cornerRadius(16)
+            }
+            .frame(maxWidth: 370)
+
+            // MARK: - Sign up
+            Spacer()
+            Button(action: {
+                // Create account action
+            }) {
                 Text("Not on Munch! yet? Create an account")
+                    .font(.footnote)
             }
         }
+        .padding(.horizontal)
+        .padding(.bottom, 32)
     }
 }
 
