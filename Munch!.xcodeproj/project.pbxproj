@@ -49,6 +49,11 @@
 			path = "Munch!UITests";
 			sourceTree = "<group>";
 		};
+		C6D5DE092DC2C7A2004D5C80 /* Extensions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +85,7 @@
 		C61F7F2A2DBB47430009E0B2 = {
 			isa = PBXGroup;
 			children = (
+				C6D5DE092DC2C7A2004D5C80 /* Extensions */,
 				C61F7F352DBB47430009E0B2 /* Munch! */,
 				C61F7F462DBB47450009E0B2 /* Munch!Tests */,
 				C61F7F502DBB47450009E0B2 /* Munch!UITests */,
@@ -114,6 +120,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				C61F7F352DBB47430009E0B2 /* Munch! */,
+				C6D5DE092DC2C7A2004D5C80 /* Extensions */,
 			);
 			name = "Munch!";
 			packageProductDependencies = (
