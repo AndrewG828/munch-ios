@@ -67,11 +67,10 @@ struct Login: View {
 
             // MARK: - Sign up
             Spacer()
-            Button(action: {
-                // Create account action
-            }) {
+            NavigationLink(destination: SignUp()) {
                 Text("Not on Munch! yet? Create an account")
                     .font(.footnote)
+                    .foregroundColor(Color(.systemBlue))
             }
         }
         .padding(.horizontal, 35)

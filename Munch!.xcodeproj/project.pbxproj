@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C6B952B22DC1BE6900665F20 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C6B952B12DC1BE6900665F20 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C61F7F442DBB47450009E0B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6B952B22DC1BE6900665F20 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = "Munch!";
 			packageProductDependencies = (
+				C6B952B12DC1BE6900665F20 /* Alamofire */,
 			);
 			productName = "Munch!";
 			productReference = C61F7F332DBB47430009E0B2 /* Munch!.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = C61F7F2A2DBB47430009E0B2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C6B952B02DC1BE6900665F20 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C61F7F342DBB47430009E0B2 /* Products */;
 			projectDirPath = "";
@@ -552,6 +561,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C6B952B02DC1BE6900665F20 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C6B952B12DC1BE6900665F20 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6B952B02DC1BE6900665F20 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C61F7F2B2DBB47430009E0B2 /* Project object */;
 }
