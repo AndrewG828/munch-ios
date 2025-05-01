@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Food: Hashable, Identifiable {
+struct Food: Hashable, Identifiable, Decodable {
     var id: Int
     var name: String
     var price: Float
@@ -16,7 +16,7 @@ struct Food: Hashable, Identifiable {
     var rating: Float
     var restaurantId: [Int]
     enum CodingKeys: String, CodingKey {
-        case id, name, price, category, imageUrl = "image_url", rating, restuarantId
+        case id, name, price, category, imageUrl = "image_url", rating, restaurantId
     }
 }
 

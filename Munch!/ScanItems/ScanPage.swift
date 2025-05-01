@@ -81,34 +81,30 @@ import PhotosUI
 struct ScanPage: View {
     @State private var selectedImage: UIImage? = nil
     @Environment(\.presentationMode) var presentationMode
-    
+
     var body: some View {
         VStack(spacing: 24) {
             if let image = selectedImage {
-                // Display the captured image
+                // Display captured image
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 300)
                     .cornerRadius(12)
-                
-                // Action buttons for captured image
+
+                // Action buttons
                 HStack(spacing: 16) {
                     Button("Retake") {
-                        // Reset and open camera again
                         selectedImage = nil
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            openCamera()
-                        }
+                        openCamera()
                     }
                     .foregroundColor(.black)
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
-                    
+
                     Button("Send to Backend") {
                         uploadImageToBackend(image)
-                        // Dismiss the view after starting upload
                         presentationMode.wrappedValue.dismiss()
                     }
                     .foregroundColor(.white)
@@ -117,32 +113,30 @@ struct ScanPage: View {
                     .cornerRadius(8)
                 }
             } else {
-                // Show a placeholder while camera is loading
+                // Show loading placeholder
                 ProgressView()
                     .scaleEffect(1.5)
                     .padding()
             }
         }
         .padding()
-        // Open camera automatically when view appears
         .onAppear {
-            // Small delay to ensure view is fully loaded
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if selectedImage == nil {
                 openCamera()
             }
         }
     }
-    
+
     func uploadImageToBackend(_ image: UIImage) {
         guard let imageData = image.jpegData(compressionQuality: 0.8),
               let url = URL(string: "https://your-backend.com/upload") else { return }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
         request.httpBody = imageData
-        
-        URLSession.shared.dataTask(with: request) { _, response, error in
+
+        URLSession.shared.dataTask(with: request) { _, _, error in
             if let error = error {
                 print("Upload failed:", error.localizedDescription)
             } else {
@@ -150,7 +144,7 @@ struct ScanPage: View {
             }
         }.resume()
     }
-    
+
     func openCamera() {
         let picker = UIImagePickerController()
         picker.sourceType = .camera
@@ -158,13 +152,12 @@ struct ScanPage: View {
         picker.delegate = CameraDelegate(onImagePicked: { image in
             self.selectedImage = image
         })
-        
-        // Present camera from the top-most view controller
+
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController {
             var topController = rootViewController
-            while let presentedController = topController.presentedViewController {
-                topController = presentedController
+            while let presented = topController.presentedViewController {
+                topController = presented
             }
             topController.present(picker, animated: true)
         }
@@ -174,21 +167,21 @@ struct ScanPage: View {
 // Camera delegate for handling the native camera interface
 class CameraDelegate: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let onImagePicked: (UIImage) -> Void
-    
+
     init(onImagePicked: @escaping (UIImage) -> Void) {
         self.onImagePicked = onImagePicked
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true)
-        
+
         if let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
             DispatchQueue.main.async {
                 self.onImagePicked(image)
             }
         }
     }
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
