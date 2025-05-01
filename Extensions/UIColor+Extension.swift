@@ -14,6 +14,7 @@ extension UIColor {
         let black = UIColor.black
         let white = UIColor.white
         let gray = UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1)
+        let darkGray = UIColor(red: 169/255, green: 169/255, blue: 169/255, alpha: 1)
         let lightGray = UIColor(red: 243/255,  green: 244/255, blue: 246/255, alpha: 1)
     }
 }
