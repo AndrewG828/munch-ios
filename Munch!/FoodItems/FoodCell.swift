@@ -41,9 +41,7 @@ struct FoodCell: View {
                     
                     Spacer()
                     
-                    Text(String(format: "%.1f", food.rating))
-                        .font(.system(size: 18, weight: .heavy))
-                        .foregroundColor(.black)
+                    StarRatingView(rating: food.rating)
                 }
                 .padding(.horizontal, 8)
                 
@@ -67,4 +65,9 @@ struct FoodCell: View {
         )
     }
 }
+
+#Preview{
+    FoodCell(food: Food(id: 1, name: "Yummy", price: 10.01, category: "Yum", imageUrl: "https://www.shutterstock.com/image-vector/yummy-word-pop-art-retro-260nw-1111964420.jpg", rating: 4.5, restaurant: RestaurantResponse(id: 1, name: "yay", address: "yum")))
+}
+
 

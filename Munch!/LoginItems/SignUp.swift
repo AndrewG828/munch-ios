@@ -158,8 +158,6 @@ struct SignUp: View {
             .navigationDestination(isPresented: $shouldNavigate) {
                 if let user = userViewModel.user {
                     HomeScreen(user: user)
-                } else {
-                    HomeScreen(user: nil)
                 }
             }
     }

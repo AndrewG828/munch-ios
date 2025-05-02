@@ -9,10 +9,12 @@ struct HomeScreen: View {
     @State private var filter = ""
     @State private var showScanPage = false
     @State private var showProfilePage = false
+    @State private var showSearch = false
     
     @StateObject private var foodViewModel = FoodViewModel()
+    @StateObject private var restaurantViewModel = RestaurantViewModel()
     
-    var user: User?
+    var user: User
     
     var filters: [(String, String)] = [("Location", "Nearby"), ("Trending", "Trending"), ("Friends", "Friends")]
     
@@ -22,15 +24,17 @@ struct HomeScreen: View {
     let rows = [GridItem()]
     
     var body: some View {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 20) {
                 
                 // Title
                 Text("Munch!")
                     .font(.system(size: 30, weight: .bold))
-                    .padding(.top, 8) // Top padding to offset Dynamic Island
+                    .padding(.top, 8)
                 
                 // Search Bar
-                Button {} label: {
+                Button {
+                    showSearch = true
+                } label: {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .resizable()
@@ -88,8 +92,10 @@ struct HomeScreen: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHGrid(rows: rows, spacing: 16) {
-                                ForEach(Restaurant.dummyData) { restaurant in
-                                    NearYouCell(restuarant: restaurant)
+                                ForEach(restaurantViewModel.restaurants) { restaurant in
+                                    NavigationLink(destination: RestaurantPage(restaurant: restaurant, user: user)){
+                                        NearYouCell(restuarant: restaurant)
+                                    }
                                 }
                             }
                             .frame(height: 110)
@@ -105,7 +111,7 @@ struct HomeScreen: View {
                         
                         LazyVStack(spacing: 25) {
                             ForEach(foodViewModel.foods) { food in
-                                NavigationLink(destination: ReviewPage(food: food)) {
+                                NavigationLink(destination: ReviewPage(food: food, user: user)) {
                                     FoodCell(food: food)
                                 }
                             }
@@ -153,10 +159,16 @@ struct HomeScreen: View {
                 ScanPage()
             }
             .navigationDestination(isPresented: $showProfilePage) {
-                ProfilePage(user: user!)
+                ProfilePage(user: user)
+            }
+            .sheet(isPresented: $showSearch) {
+                SearchScreen(user: user)
             }
             .onAppear{
                 foodViewModel.getAllFoods()
+            }
+            .onAppear {
+                restaurantViewModel.fetchRestaurants()
             }
     }
 }

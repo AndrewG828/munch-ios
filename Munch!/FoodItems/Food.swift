@@ -30,7 +30,7 @@ struct FoodListResponse: Codable {
     let foodItems: [Food]
 
     enum CodingKeys: String, CodingKey {
-        case foodItems = "food items"
+        case foodItems = "food_items"
     }
 }
 

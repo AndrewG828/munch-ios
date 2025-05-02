@@ -10,6 +10,9 @@ struct ReviewPage: View {
     @Environment(\.dismiss) var dismiss
     
     var food: Food
+    var user: User
+    
+    @StateObject var reviewViewModel = ReviewViewModel()
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -61,15 +64,24 @@ struct ReviewPage: View {
                 .padding(.bottom)
                 
                 VStack (spacing: 40) {
-                    MakeReviewCell()
+                    MakeReviewCell(
+                        rating: $reviewViewModel.rating,
+                        message: $reviewViewModel.reviewText,
+                        onPost: {
+                            reviewViewModel.submitReview(userId: user.id, foodId: food.id)
+                        }
+                    )
                     
                     VStack (spacing: 20){
-                        ForEach(Review.dummyData, id: \.id) { review in
+                        ForEach(reviewViewModel.reviews, id: \.id) { review in
                             ReviewCell(review: review)
                         }
                     }
                 }
                 .padding(.horizontal, 15)
+            }
+            .onAppear {
+                reviewViewModel.fetchReviews(foodId: food.id)
             }
         }
         .ignoresSafeArea(edges: .top)

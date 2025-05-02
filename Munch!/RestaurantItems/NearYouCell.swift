@@ -11,7 +11,7 @@ struct NearYouCell: View {
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            AsyncImage(url: URL(string: restuarant.imageUrl)) { phase in
+            AsyncImage(url: URL(string: /*restuarant.imageUrl*/ "hi")) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
@@ -42,6 +42,3 @@ struct NearYouCell: View {
     }
 }
 
-#Preview {
-    NearYouCell(restuarant: Restaurant.dummyData[0])
-}
