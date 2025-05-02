@@ -172,5 +172,38 @@ class NetworkManager {
                 }
             }
     }
+    
+    func sendVenmoRequest(userId: Int, recipientUsername: String, paymentAmount: Double, message: String, completion: @escaping (String?) -> Void) {
+        let endpoint = mainUrl + "/payment/\(userId)/"
+
+        let parameters: [String: Any] = [
+            "recipient_username": recipientUsername,
+            "payment_amount": paymentAmount,
+            "message": message
+        ]
+
+        AF.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    if let dict = value as? [String: Any],
+                       let link = dict["payment_link"] as? String {
+                        completion(link)
+                    } else {
+                        print("Error: payment_link not found in response.")
+                        completion(nil)
+                    }
+                case .failure(let error):
+                    print("Error sending Venmo request: \(error.localizedDescription)")
+                    if let data = response.data,
+                       let raw = String(data: data, encoding: .utf8) {
+                        print("Raw server response:\n\(raw)")
+                    }
+                    completion(nil)
+                }
+            }
+    }
+
 }
 

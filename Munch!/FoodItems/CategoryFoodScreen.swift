@@ -75,7 +75,10 @@ struct CategoryFoodScreen: View {
                     .frame(maxHeight: .infinity)
                 } else {
                     VStack(spacing: 20) {
-                        ForEach(foodViewModel.categoryFoods, id: \.id) { food in
+                        ForEach(
+                            foodViewModel.categoryFoods.sorted(by: { $0.rating > $1.rating }),
+                            id: \.id
+                        ) { food in
                             NavigationLink(destination: ReviewPage(food: food, user: user)) {
                                 FoodCell(food: food)
                             }
