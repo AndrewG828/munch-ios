@@ -17,5 +17,7 @@
 			<string>Editor</string>
 		</dict>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>We need camera access to scan food items.</string>
 </dict>
 </plist>

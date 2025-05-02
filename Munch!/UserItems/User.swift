@@ -12,6 +12,7 @@ struct User: Hashable, Codable {
     var email: String
     var phone: Int
     var venmo: String
+    var profileImage: Data? = nil
 //    var foods: [Food]
 //    var favorites: [Food]
 //    var reviews: [Review]

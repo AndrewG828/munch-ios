@@ -92,6 +92,9 @@ struct SignUp: View {
                     //Sign up button
                     Button{
                         userViewModel.createUser {
+                            if let imageData = imageData {
+                                    userViewModel.user?.profileImage = imageData
+                                }
                             withAnimation {
                                 shouldNavigate = true
                             }

@@ -15,7 +15,7 @@ class NetworkManager {
         
     }
     
-    private let mainUrl = "http://127.0.0.1:5001/api"
+    private let mainUrl = "http://10.48.129.73:5001/api"
     
     let decoder = JSONDecoder()
     
