@@ -15,6 +15,17 @@ struct ReceiptItem: Codable, Hashable {
 
 struct ReceiptResponse: Hashable, Codable {
     var items: [ReceiptItem]
+    var paymentTotal: Float
+    var tax: Float
+    var tips: Float
+    var storeName: String
+    enum CodingKeys: String, CodingKey {
+        case items
+        case paymentTotal = "payment_total"
+        case tax
+        case tips
+        case storeName = "store_name"
+    }
 }
 
 extension ReceiptItem {

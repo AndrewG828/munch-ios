@@ -9,6 +9,16 @@ import SwiftUI
 struct SplitBillScreen: View {
     
     var items: [ReceiptItem]
+    var tax: Float
+    var tips: Float
+    var paymentTotal: Float
+    
+    @Binding var isPresented: Bool
+    
+    @State var navigateConfirmation = false
+    @State private var showAssignScreen = false
+    @State private var selectedFoodName = ""
+    @State private var assignments: [String: [String]] = [:]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -31,7 +41,32 @@ struct SplitBillScreen: View {
             ScrollView (.vertical, showsIndicators: false){
                 VStack (spacing: 16){
                     ForEach(items, id: \.self) { item in
-                        ReceiptItemCell(item: item)
+                        VStack(alignment: .leading, spacing: 6) {
+                            Button {
+                                selectedFoodName = item.name
+                                showAssignScreen = true
+                            } label: {
+                                ReceiptItemCell(item: item)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+
+                            if let assigned = assignments[item.name], !assigned.isEmpty {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach(assigned, id: \.self) { name in
+                                            Text(name)
+                                                .font(.system(size: 12, weight: .medium))
+                                                .padding(.horizontal, 10)
+                                                .padding(.vertical, 5)
+                                                .background(Color.blue.opacity(0.1))
+                                                .foregroundColor(.blue)
+                                                .clipShape(Capsule())
+                                        }
+                                    }
+                                    .padding(.horizontal, 4)
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -42,7 +77,7 @@ struct SplitBillScreen: View {
                     HStack{
                         Text("Tax")
                         Spacer()
-                        Text(String(format: "$%0.2f", 5.50))
+                        Text(String(format: "$%0.2f", tax))
                     }
                     .font(.system(size: 16, weight: .semibold))
                     .padding()
@@ -53,7 +88,7 @@ struct SplitBillScreen: View {
                     HStack{
                         Text("Tips")
                         Spacer()
-                        Text(String(format: "$%0.2f", 8.00))
+                        Text(String(format: "$%0.2f", tips))
                     }
                     .font(.system(size: 16, weight: .semibold))
                     .padding()
@@ -67,7 +102,7 @@ struct SplitBillScreen: View {
                 HStack{
                     Text("Total")
                     Spacer()
-                    Text(String(format: "$%0.2f", 80.55))
+                    Text(String(format: "$%0.2f", paymentTotal))
                 }
                 .font(.system(size: 16, weight: .semibold))
                 .padding()
@@ -90,8 +125,28 @@ struct SplitBillScreen: View {
                         .fill(Color(UIColor.munch.beige).opacity(0.6)))
             }
             
+            Button {
+                navigateConfirmation = true
+            }label: {
+                Text("Split!")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.gray)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(UIColor.munch.beige).opacity(0.6)))
+            }
+            
         }
         .padding(.horizontal, 35)
+        .navigationDestination(isPresented: $navigateConfirmation) {
+            ConfirmationScreen(isPresented: $isPresented)
+        }
+        .sheet(isPresented: $showAssignScreen) {
+            AssignFriendsScreen(foodName: selectedFoodName) { selectedFriends in
+                assignments[selectedFoodName] = selectedFriends
+            }
+        }
         .navigationBarBackButtonHidden(true)
     }
 }

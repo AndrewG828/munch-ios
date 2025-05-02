@@ -12,6 +12,8 @@ struct ScanPage: View {
     @State private var showCamera = false
     @State private var navigateToSplit = false
     
+    @Binding var isPresented: Bool
+    
     @StateObject var receiptViewModel = ReceiptViewModel()
 
     var body: some View {
@@ -22,13 +24,13 @@ struct ScanPage: View {
                         showCamera = true
                     }
                     .navigationDestination(isPresented: $navigateToSplit) {
-                        SplitBillScreen(items: receiptViewModel.splitFoods)
+                        SplitBillScreen(items: receiptViewModel.splitFoods, tax: receiptViewModel.tax, tips: receiptViewModel.tips, paymentTotal: receiptViewModel.paymentTotal, isPresented: $isPresented)
                     }
                     .fullScreenCover(isPresented: $showCamera) {
                         CameraView { image in
                             receiptViewModel.receiptImage = image
                             receiptViewModel.scrapeReceipt()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 8.5) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                                 self.navigateToSplit = true
                             }
                         }
@@ -103,7 +105,4 @@ class CameraDelegate: NSObject, UIImagePickerControllerDelegate, UINavigationCon
     }
 }
 
-#Preview {
-    ScanPage()
-}
 

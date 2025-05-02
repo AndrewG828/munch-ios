@@ -116,7 +116,6 @@ struct HomeScreen: View {
                                 }
                             }
                         }
-                        .padding(.trailing)
                     }
                 }
                 
@@ -156,7 +155,7 @@ struct HomeScreen: View {
             .navigationBarBackButtonHidden(true)
             .padding(.horizontal, 35)
             .sheet(isPresented: $showScanPage) {
-                ScanPage()
+                ScanPage(isPresented: $showScanPage)
             }
             .navigationDestination(isPresented: $showProfilePage) {
                 ProfilePage(user: user)

@@ -53,12 +53,12 @@ class NetworkManager {
             }
     }
     
-    func scrapeReceipt(image: UIImage, completion: @escaping ([ReceiptItem]) -> Void) {
+    func scrapeReceipt(image: UIImage, completion: @escaping (ReceiptResponse?) -> Void) {
         let endpoint = mainUrl + "/receipts/"
         
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             print("Failed to convert UIImage to JPEG")
-            completion([])
+            completion(nil)
             return
         }
 
@@ -69,14 +69,14 @@ class NetworkManager {
         .responseDecodable(of: ReceiptResponse.self) { response in
             switch response.result {
             case .success(let receiptResponse):
-                completion(receiptResponse.items)
+                completion(receiptResponse)
             case .failure(let error):
                 print("Error in scraping receipt: \(error.localizedDescription)")
                 if let data = response.data,
                    let raw = String(data: data, encoding: .utf8) {
                     print("Server response:\n\(raw)")
                 }
-                completion([])
+                completion(nil)
             }
         }
     }

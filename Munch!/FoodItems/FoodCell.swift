@@ -46,7 +46,7 @@ struct FoodCell: View {
                 .padding(.horizontal, 8)
                 
                 HStack {
-                    Text("$\(String(format: "%.2f", food.price)) - Restaurant Info")
+                    Text("$\(String(format: "%.2f", food.price)) - \(food.restaurant.name)")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.gray)
                     

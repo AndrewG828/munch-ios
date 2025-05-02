@@ -10,8 +10,16 @@ struct Restaurant: Hashable, Identifiable, Codable {
     var id: Int
     var name: String
     var address: String
-//    var imageUrl: String
+    var imageUrl: String
     var menu: [Food]
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case address
+        case imageUrl = "image_url"
+        case menu
+    }
 }
 
 struct RestaurantResponse: Hashable, Identifiable, Codable {
