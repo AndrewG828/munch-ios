@@ -77,6 +77,3 @@ struct ReviewPage: View {
     }
 }
 
-#Preview {
-    ReviewPage(food: Food.dummyData[0])
-}

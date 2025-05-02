@@ -10,6 +10,8 @@ struct HomeScreen: View {
     @State private var showScanPage = false
     @State private var showProfilePage = false
     
+    @StateObject private var foodViewModel = FoodViewModel()
+    
     var user: User?
     
     var filters: [(String, String)] = [("Location", "Nearby"), ("Trending", "Trending"), ("Friends", "Friends")]
@@ -102,7 +104,7 @@ struct HomeScreen: View {
                         }
                         
                         LazyVStack(spacing: 25) {
-                            ForEach(Food.dummyData) { food in
+                            ForEach(foodViewModel.foods) { food in
                                 NavigationLink(destination: ReviewPage(food: food)) {
                                     FoodCell(food: food)
                                 }
@@ -152,6 +154,9 @@ struct HomeScreen: View {
             }
             .navigationDestination(isPresented: $showProfilePage) {
                 ProfilePage(user: user!)
+            }
+            .onAppear{
+                foodViewModel.getAllFoods()
             }
     }
 }

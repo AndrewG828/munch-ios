@@ -17,17 +17,17 @@ struct FoodCell: View {
                 switch phase {
                 case .empty:
                     ProgressView()
-                        .frame(width: 320, height: 160)
+                        .frame(width: 350, height: 160)
                 case .success(let image):
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 320, height: 160)
+                        .frame(width: 350, height: 160)
                         
                         .clipped()
                 case .failure(_):
                     ProgressView()
-                        .frame(width: 320, height: 160)
+                        .frame(width: 350, height: 160)
                 @unknown default:
                     EmptyView()
                 }
@@ -58,7 +58,7 @@ struct FoodCell: View {
             }
         }
         .padding(.bottom)
-        .frame(width: 320)
+        .frame(width: 350)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .background(
             RoundedRectangle(cornerRadius: 10)
@@ -68,6 +68,3 @@ struct FoodCell: View {
     }
 }
 
-#Preview {
-    FoodCell(food: Food.dummyData[0])
-}

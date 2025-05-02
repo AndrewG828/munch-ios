@@ -14,6 +14,8 @@ struct ProfilePage: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var imageData: Data? = nil
     
+    @StateObject var foodViewModel = FoodViewModel()
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
             VStack(spacing: 25){
@@ -93,7 +95,7 @@ struct ProfilePage: View {
                     .padding(.vertical)
                     .padding(.horizontal, 6)
                     .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.gray.opacity(0.2)))
+                        .fill(Color.gray.opacity(0.1)))
                     
                     HStack {
                         Text("🍟 Cajun Fries")
@@ -107,7 +109,7 @@ struct ProfilePage: View {
                     .padding(.vertical)
                     .padding(.horizontal, 6)
                     .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.gray.opacity(0.2)))
+                        .fill(Color.gray.opacity(0.1)))
                     
                     HStack {
                         Text("💰 Jimmy Chen")
@@ -121,13 +123,13 @@ struct ProfilePage: View {
                     .padding(.vertical)
                     .padding(.horizontal, 6)
                     .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.gray.opacity(0.2)))
+                        .fill(Color.gray.opacity(0.1)))
                 }
                 VStack (alignment: .leading){
                     Text("Your Ratings")
                         .font(.system(size: 16, weight: .heavy))
                     
-                    ForEach(Food.dummyData, id: \.id){ food in
+                    ForEach(foodViewModel.foods, id: \.id){ food in
                         FoodCell(food: food)
                     }
                 }
@@ -135,6 +137,9 @@ struct ProfilePage: View {
             }
             .padding(.horizontal, 35)
             .padding(.vertical, 20)
+            .onAppear{
+                foodViewModel.getAllFoods()
+            }
         }
     }
 }
