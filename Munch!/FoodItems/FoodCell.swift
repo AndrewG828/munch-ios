@@ -17,17 +17,17 @@ struct FoodCell: View {
                 switch phase {
                 case .empty:
                     ProgressView()
-                        .frame(width: 320, height: 160)
+                        .frame(width: 350, height: 160)
                 case .success(let image):
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 320, height: 160)
+                        .frame(width: 350, height: 160)
                         
                         .clipped()
                 case .failure(_):
                     ProgressView()
-                        .frame(width: 320, height: 160)
+                        .frame(width: 350, height: 160)
                 @unknown default:
                     EmptyView()
                 }
@@ -41,9 +41,7 @@ struct FoodCell: View {
                     
                     Spacer()
                     
-                    Text(String(format: "%.1f", food.rating))
-                        .font(.system(size: 18, weight: .heavy))
-                        .foregroundColor(.black)
+                    StarRatingView(rating: food.rating)
                 }
                 .padding(.horizontal, 8)
                 
@@ -58,7 +56,7 @@ struct FoodCell: View {
             }
         }
         .padding(.bottom)
-        .frame(width: 320)
+        .frame(width: 350)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .background(
             RoundedRectangle(cornerRadius: 10)
@@ -68,6 +66,8 @@ struct FoodCell: View {
     }
 }
 
-#Preview {
-    FoodCell(food: Food.dummyData[0])
+#Preview{
+    FoodCell(food: Food(id: 1, name: "Yummy", price: 10.01, category: "Yum", imageUrl: "https://www.shutterstock.com/image-vector/yummy-word-pop-art-retro-260nw-1111964420.jpg", rating: 4.5, restaurant: RestaurantResponse(id: 1, name: "yay", address: "yum")))
 }
+
+

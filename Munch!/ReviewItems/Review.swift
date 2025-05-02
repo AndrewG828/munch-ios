@@ -7,14 +7,28 @@
 
 import Foundation
 
-struct Review: Hashable, Identifiable {
+struct Review: Hashable, Identifiable, Codable {
     var id: Int
     var username: String
     var review: String
     var rating: Float
     var profileImage: String
+    enum CodingKeys: String, CodingKey {
+        case id
+        case username
+        case review
+        case rating
+        case profileImage = "profile_image"
+    }
 //    var foodItem: String
 //    var foodUrl: String
+}
+
+struct ReviewRequest: Encodable {
+    let user_id: Int
+    let food_id: Int
+    let rating: Float
+    let review: String
 }
 
 extension Review {

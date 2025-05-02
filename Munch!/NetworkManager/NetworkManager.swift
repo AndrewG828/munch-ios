@@ -7,6 +7,7 @@
 
 import Alamofire
 import Foundation
+import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
@@ -31,6 +32,143 @@ class NetworkManager {
                 case .failure(let error):
                     print("Create user failed: \(error.localizedDescription)")
                     completion(.failure(error))
+                }
+            }
+    }
+    
+    func getAllFood(completion: @escaping ([Food]) -> Void) {
+        let endpoint = mainUrl + "/food/"
+        
+        AF.request(endpoint, method: .get)
+            .validate()
+            .responseDecodable(of: FoodListResponse.self, decoder: decoder) {
+                response in
+                switch response.result {
+                case .success(let foods):
+                    completion(foods.foodItems)
+                case .failure(let error):
+                    print("Error getting all foods \(error.localizedDescription)")
+                    completion([])
+                }
+            }
+    }
+    
+    func scrapeReceipt(image: UIImage, completion: @escaping ([ReceiptItem]) -> Void) {
+        let endpoint = mainUrl + "/receipts/"
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            print("Failed to convert UIImage to JPEG")
+            completion([])
+            return
+        }
+
+        AF.upload(multipartFormData: { form in
+            form.append(imageData, withName: "image", fileName: "receipt.jpg", mimeType: "image/jpeg")
+        }, to: endpoint)
+        .validate()
+        .responseDecodable(of: ReceiptResponse.self) { response in
+            switch response.result {
+            case .success(let receiptResponse):
+                completion(receiptResponse.items)
+            case .failure(let error):
+                print("Error in scraping receipt: \(error.localizedDescription)")
+                if let data = response.data,
+                   let raw = String(data: data, encoding: .utf8) {
+                    print("Server response:\n\(raw)")
+                }
+                completion([])
+            }
+        }
+    }
+    
+    func fetchCategories(completion: @escaping (CategoryResponse?) -> Void) {
+        let endpoint = mainUrl + "/food/categories/"
+        
+        AF.request(endpoint, method: .get)
+            .validate()
+            .responseDecodable(of: CategoryResponse.self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let categories):
+                    completion(categories)
+                case .failure(let error):
+                    print("Error fetching all categories \(error.localizedDescription)")
+                    if let data = response.data,
+                        let raw = String(data: data, encoding: .utf8) {
+                            print("Raw server response:\n\(raw)")
+                        }
+                    completion(nil)
+                }
+            }
+    }
+    
+    func getAllFoodByCategory(category: String, completion: @escaping ([Food]) -> Void) {
+        let endpoint = mainUrl + "/\(category)/foods/"
+        
+        AF.request(endpoint, method: .get)
+            .validate()
+            .responseDecodable(of: FoodListResponse.self, decoder: decoder) {
+                response in
+                switch response.result {
+                case .success(let foods):
+                    completion(foods.foodItems)
+                case .failure(let error):
+                    print("Error getting all foods \(error.localizedDescription)")
+                    completion([])
+                }
+            }
+    }
+    
+    func postReview(review: ReviewRequest, completion: @escaping (Bool) -> Void) {
+            let endpoint = mainUrl + "/food/reviews/"
+
+            AF.request(endpoint,
+                       method: .post,
+                       parameters: review,
+                       encoder: JSONParameterEncoder.default)
+                .validate()
+                .response { response in
+                    switch response.result {
+                    case .success:
+                        completion(true)
+                    case .failure(let error):
+                        print("Error posting review: \(error.localizedDescription)")
+                        completion(false)
+                    }
+                }
+        }
+    
+    func getReviewsForFood(foodId: Int, completion: @escaping ([Review]) -> Void) {
+        let endpoint = mainUrl + "/food/\(foodId)/reviews/"
+
+        AF.request(endpoint, method: .get)
+            .validate()
+            .responseDecodable(of: [Review].self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let reviews):
+                    completion(reviews)
+                case .failure(let error):
+                    print("Error getting reviews for food \(foodId): \(error.localizedDescription)")
+                    completion([])
+                }
+            }
+    }
+    
+    func getAllRestaurants(completion: @escaping ([Restaurant]) -> Void) {
+        let endpoint = mainUrl + "/restaurants/"
+
+        AF.request(endpoint)
+            .validate()
+            .responseDecodable(of: RestaurantHelper.self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(data.restaurants)
+                case .failure(let error):
+                    print("Error fetching restaurants:", error.localizedDescription)
+                    if let data = response.data,
+                        let raw = String(data: data, encoding: .utf8) {
+                            print("Raw server response:\n\(raw)")
+                        }
+                    completion([])
                 }
             }
     }

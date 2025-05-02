@@ -49,7 +49,7 @@ struct SplashScreenView: View {
                 ZStack {
                     if showText {
                         Text("Munch!")
-                            .font(.system(size: 40, weight: .bold))
+                            .font(.system(size: 55, weight: .bold))
                             .foregroundColor(.black)
                             .opacity(textOpacity)
                             .scaleEffect(textScale)
