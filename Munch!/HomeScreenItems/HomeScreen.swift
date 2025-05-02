@@ -8,6 +8,7 @@ struct HomeScreen: View {
     @State private var search: String = ""
     @State private var filter = ""
     @State private var showScanPage = false
+    @State private var showProfilePage = false
     
     var user: User?
     
@@ -120,8 +121,10 @@ struct HomeScreen: View {
                         
                         Button {
                             navBar = navBari.1
-                            if navBari.1 == "Scan" {
+                            if navBar == "Scan" {
                                 showScanPage = true
+                            } else if navBar == "Profile" {
+                                showProfilePage = true
                             }
                         } label: {
                             VStack {
@@ -138,6 +141,7 @@ struct HomeScreen: View {
                         }
                     }
                 }
+                .padding(.bottom, 8)
                 .padding(.top)
                 .frame(height: 20)
             }
@@ -145,6 +149,9 @@ struct HomeScreen: View {
             .padding(.horizontal, 35)
             .sheet(isPresented: $showScanPage) {
                 ScanPage()
+            }
+            .navigationDestination(isPresented: $showProfilePage) {
+                ProfilePage(user: user!)
             }
     }
 }

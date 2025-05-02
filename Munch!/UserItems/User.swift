@@ -22,3 +22,9 @@ struct UserCredentials: Codable {
     var username: String
     var password: String
 }
+
+extension User {
+    static let dummyData = [
+        User(id: 1, username: "Andrew", email: "Andrew@gmail.com", phone: 757, venmo: "Venmo")
+    ]
+}
