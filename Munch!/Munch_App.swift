@@ -11,7 +11,7 @@ import SwiftUI
 struct Munch_App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreenView(mainContentView: AnyView(ContentView()))
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }
