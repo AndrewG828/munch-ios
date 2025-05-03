@@ -46,7 +46,8 @@
 ---
 
 ### Scanning Page ~> Cropping ~> Analyzing ~> Bill Splitting Page
-![iMockup - iPhone 15 Pro Max](https://github.com/user-attachments/assets/3ce3084c-7f03-4c1a-906f-dcc413ace1e5)               ![iMockup - iPhone 15 Pro Max-1](https://github.com/user-attachments/assets/75ef1975-b306-44e6-b65d-4593cf1f941d)               ![iMockup - iPhone 15 Pro Max-2](https://github.com/user-attachments/assets/41b014ca-a105-4364-b09b-ef847552d482)               ![iMockup - iPhone 15 Pro Max (2)](https://github.com/user-attachments/assets/a90a4aa0-dcf2-49d3-afc5-a4525dfe9e06)
+![iMockup - iPhone 15 Pro Max](https://github.com/user-attachments/assets/3ce3084c-7f03-4c1a-906f-dcc413ace1e5)               ![iMockup - iPhone 15 Pro Max-1](https://github.com/user-attachments/assets/75ef1975-b306-44e6-b65d-4593cf1f941d)              
+![iMockup - iPhone 15 Pro Max-2](https://github.com/user-attachments/assets/41b014ca-a105-4364-b09b-ef847552d482)               ![iMockup - iPhone 15 Pro Max (2)](https://github.com/user-attachments/assets/a90a4aa0-dcf2-49d3-afc5-a4525dfe9e06)
 
 ---
 
