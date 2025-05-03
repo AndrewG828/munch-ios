@@ -1,6 +1,5 @@
 # Munch!
 
-
 ## App Name: Munch!
 ### Tagline: 📸 Snap, Split, Rate: Group Dining Made Easy!
 ### [Backend Repository Link](https://github.com/yufanhao/munch-backend)
@@ -12,7 +11,27 @@
 ## Backend
 * Fanhao Yu
 * Jason Guo
+
 ---------------
+
+## 📚 Table of Contents
+
+- [App Description](#app-description)
+- [App Requirements](#app-requirements)
+- [Features](#features)
+  - [App Icon](#app-icon)
+  - [App Launch Animation](#app-launch-animation)
+  - [Login and Signup Pages](#login-and-signup-pages)
+  - [Home Page](#home-page-)
+  - [Search Page → Food Category Page](#search-page--food-category-page)
+  - [Food Near You → Restaurant Page → Apple Maps](#food-near-you-page--resturant-page--apple-maps)
+  - [Restaurant Specific Item Page](#resturant-specific-item-page)
+  - [Scanning → Analyzing → Bill Splitting](#scanning-page--cropping--analyzing--bill-splitting-page)
+  - [Profile → Request Sent → Venmo](#profile-page--request-sent--venmo-payment-page)
+- [Thanks](#thanks-for-munching-with-us-)
+
+---------------
+
 ## App Description
 
 #### This app simplifies bill splitting and food discovery among friends. Users can scan receipts, assign items to friends, and automatically send Venmo requests with the correct amounts. After payment, users can rate their assigned items from 0 to 5 stars and leave a short message. These ratings appear on user profiles and contribute to a shared home feed, where users can explore the highest-rated, store-specific food items. A built-in map displays the locations of these top-rated items, allowing users to discover great food nearby and tap to open Apple Maps for instant directions. Whether you're settling up or seeking your next favorite meal, this app makes dining out easier.
