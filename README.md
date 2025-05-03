@@ -18,7 +18,9 @@
 ---------------
 
 ## App Requirements
-#### <><><>><><ANDREW INSERT TEXT HERE ><><><><
+* Multiple Screens: Includes login, signup, home page, food review pages, restaurant based pages, food category pages, profile page, camera page, and bill split pages.
+* Scrollable View: The initial screen is animated and all screens listed above are scrollable, with some having vertical and horizontal scroll features in the same page.
+* Networking Integration: Flask backend API integration with Alamofire used is all screens to fetch and post data to the Database. Used to store information such as food, restaurant, reivew, and user items.
 
 ---------------
 
