@@ -22,7 +22,7 @@
   - [App Icon](#app-icon)
   - [App Launch Animation](#app-launch-animation)
   - [Login and Signup Pages](#login-and-signup-pages)
-  - [Home Page](#home-page-)
+  - [Home Page](#home-page)
   - [Search Page → Food Category Page](#search-page--food-category-page)
   - [Food Near You → Restaurant Page → Apple Maps](#food-near-you-page--resturant-page--apple-maps)
   - [Restaurant Specific Item Page](#resturant-specific-item-page)
@@ -60,7 +60,7 @@
 
 ---
 
-### Home Page ~> ...
+### Home Page
 #### Includes:
 * Search Button
 * Foods Near You 
