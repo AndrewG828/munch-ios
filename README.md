@@ -14,6 +14,7 @@
 * Jason Guo
 ---------------
 ## App Description
+
 #### This app simplifies bill splitting and food discovery among friends. Users can scan receipts, assign items to friends, and automatically send Venmo requests with the correct amounts. After payment, users can rate their assigned items from 0 to 5 stars and leave a short message. These ratings appear on user profiles and contribute to a shared home feed, where users can explore the highest-rated, store-specific food items. A built-in map displays the locations of these top-rated items, allowing users to discover great food nearby and tap to open Apple Maps for instant directions. Whether you're settling up or seeking your next favorite meal, this app makes dining out easier.
 ---------------
 
