@@ -14,7 +14,7 @@
 * Jason Guo
 ---------------
 ## App Description
-#### adkfjdaksfjkladsf
+#### This app simplifies bill splitting and food discovery among friends. Users can scan receipts, assign items to friends, and automatically send Venmo requests with the correct amounts. After payment, users can rate their assigned items from 0 to 5 stars and leave a short message. These ratings appear on user profiles and contribute to a shared home feed, where users can explore the highest-rated, store-specific food items. A built-in map displays the locations of these top-rated items, allowing users to discover great food nearby and tap to open Apple Maps for instant directions. Whether you're settling up or seeking your next favorite meal, this app makes dining out easier.
 ---------------
 
 ## Features
@@ -58,7 +58,8 @@
 ### Scanning Page ~> Cropping ~> Analyzing ~> Bill Splitting Page
 #### The receipt scraping and camera functionality of our app allows users to take a picture of a receipt, send it to the backend as a jpeg/jpg for processing, and receive structured JSON data representing the items on the receipt. When the user navigates to the scan page, a full-screen camera view opens automatically using a UIImagePickerController wrapped in SwiftUI. After the user captures a photo and confirms it, the image is passed back to the view, and the app triggers a network request to upload the image to the Flask backend, through a ViewModel and NetworkManager.
 
-The image is sent as a multipart form-data POST request using Alamofire and receives a structured response containing the list of items, tax, tips, and total price. The app receives this response, updates its state with the parsed items, and automatically navigates to a split bill screen where the user can review and assign each item. This flow tightly integrates camera capture, image upload, backend processing, and client-side navigation to create a seamless user experience for digitizing receipts.
+#### The image is sent as a multipart form-data POST request using Alamofire and receives a structured response containing the list of items, tax, tips, and total price. The app receives this response, updates its state with the parsed items, and automatically navigates to a split bill screen where the user can review and assign each item. This flow tightly integrates camera capture, image upload, backend processing, and client-side navigation to create a seamless user experience for digitizing receipts.
+
 ![iMockup - iPhone 15 Pro Max](https://github.com/user-attachments/assets/3ce3084c-7f03-4c1a-906f-dcc413ace1e5)               ![iMockup - iPhone 15 Pro Max-1](https://github.com/user-attachments/assets/75ef1975-b306-44e6-b65d-4593cf1f941d)              
 ![iMockup - iPhone 15 Pro Max-2](https://github.com/user-attachments/assets/41b014ca-a105-4364-b09b-ef847552d482)               ![iMockup - iPhone 15 Pro Max (2)](https://github.com/user-attachments/assets/a90a4aa0-dcf2-49d3-afc5-a4525dfe9e06)
 
