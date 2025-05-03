@@ -80,4 +80,4 @@
 ![iMockup - iPhone 15 Pro Max-1](https://github.com/user-attachments/assets/12c8ae25-86a0-4501-a10f-be42804d09eb)
 
 ----
-#### Thanks for Munching with us! 😎
+#### Thanks for Munching with us! 😋
