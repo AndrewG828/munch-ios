@@ -1,4 +1,4 @@
-# Munch!
+# Munch! (Won Best UI)
 
 ## App Name: Munch!
 ### Tagline: 📸 Snap, Split, Rate: Group Dining Made Easy!
